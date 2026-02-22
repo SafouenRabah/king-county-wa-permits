@@ -5,9 +5,6 @@
 *-spacex-starlink-permits.csv
 *-intake-duration-by-permit-type.csv
 
-# Generated report
-King-County-Permit-Analysis-Report.html
-
 # OS files
 .DS_Store
 
