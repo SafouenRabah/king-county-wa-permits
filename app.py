@@ -343,7 +343,23 @@ with tab3:
 
     st.plotly_chart(fig3, use_container_width=True)
 
-    st.dataframe(summary, use_container_width=True, hide_index=True)
+    # Sort table to match chart order (longest duration first)
+    table_df = summary.sort_values("Median", ascending=False)
+    st.dataframe(
+        table_df,
+        use_container_width=True,
+        hide_index=True,
+        column_config={
+            "Permit Type": st.column_config.TextColumn("Permit Type", width="large"),
+            "Count": st.column_config.NumberColumn("Count", format="%d"),
+            "Min": st.column_config.NumberColumn("Min", format="%.0f"),
+            "Average": st.column_config.NumberColumn("Avg", format="%.0f"),
+            "Median": st.column_config.NumberColumn("Median", format="%.0f"),
+            "P75": st.column_config.NumberColumn("P75", format="%.0f"),
+            "P90": st.column_config.NumberColumn("P90", format="%.0f"),
+            "Max": st.column_config.NumberColumn("Max", format="%.0f"),
+        },
+    )
 
 # ══════════════════════════════════════════════════════════════════════════════
 # TAB 4 — Duration Trends (Year over Year)
