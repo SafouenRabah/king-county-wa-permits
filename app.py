@@ -343,8 +343,8 @@ with tab3:
 
     st.plotly_chart(fig3, use_container_width=True)
 
-    # Sort table to match chart order (longest duration first)
-    table_df = summary.sort_values("Median", ascending=False)
+    # Show only the same types as the chart, sorted by median descending
+    table_df = chart_df.sort_values("Median", ascending=False)
     st.dataframe(
         table_df,
         use_container_width=True,
