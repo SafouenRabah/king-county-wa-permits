@@ -19,7 +19,7 @@ Data: January 2023 – January 2026 | Report generated February 2026
 
 ## 1. Data Sources & Pipeline
 
-This analysis draws on **monthly permit reports** downloaded from the King County permitting portal. Two report types were combined:
+This analysis draws on **monthly permit reports** downloaded from the [King County permitting portal](https://kingcounty.gov/en/dept/local-services/certificates-permits-licenses/permits/permits-inspections-codes-buildings-land-use/permit-forms-application-materials/reports). Two report types were combined:
 
 - **Issued Permits** — 34 monthly Excel files (Jan 2023 – Jan 2026) containing milestone dates: Application Date, Open Date, Intake Complete Date, Ready to Issue Date, and Issued Date.
 - **New Applications** — 38 monthly Excel files with application metadata: permit type, project description, job value, parcel data, and applicant information.
