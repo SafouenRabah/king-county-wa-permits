@@ -60,9 +60,9 @@ Residential permits are the highest-profile and most closely watched category. T
 
 > **✅ Residential Addition-Improvement is improving.** Median processing time dropped from 61 days (2024) to 39 days (2025) — a 36% reduction. The plan review stage (IC→RTI) tightened from 39 to 29 median days. With 515 permits in 2025, this is a statistically robust improvement at scale.
 
-> **⚠️ Residential Dwelling-Single has a growing tail problem.** While the median improved slightly (202 → 184 days), the P90 surged from 362 to 551 days — meaning 1 in 10 permits now takes over 18 months. The mean rose from 225 to 245 days. The typical permit is getting a bit faster, but the worst cases are getting much worse.
+> **⚠️ Residential Dwelling-Single: median improved, but long-duration permits are increasing.** The median dropped from 202 to 184 days. However, the P90 rose from 362 to 551 days, meaning 1 in 10 permits now takes over 18 months. The mean increased from 225 to 245 days, indicating a widening spread between typical and extended-duration permits.
 
-> **⚠️ Residential Basic: small 2025 sample is alarming.** Only 19 Residential Basic permits were issued in 2025 (vs. 98 in 2024 and 110 in 2023). The median spiked from 43 to 222 days. Whether this reflects a genuine slowdown or a data timing artifact (many 2025 permits still in the pipeline) requires further investigation.
+> **⚠️ Residential Basic: limited 2025 data warrants monitoring.** Only 19 Residential Basic permits were issued in 2025 (vs. 98 in 2024 and 110 in 2023). The median rose from 43 to 222 days. This may reflect a genuine shift or a data timing artifact (many 2025 permits still in the pipeline). A follow-up review is recommended once more 2025 data is available.
 
 ### 2.2 Intake Friction: Open → Intake Complete
 
@@ -127,7 +127,7 @@ Comparing median processing times across all high-volume permit types reveals wh
 > - **Residential Addition-Improvement:** 61 → 39 days (–22 days)
 > - **Residential Dwelling-Single:** 202 → 184 days (–18 days median, though P90 worsened)
 
-> **⚠️ Residential Basic stands out as a concern:** median jumped from 43 to 222 days (+179), though the small 2025 sample (n=19) warrants caution before drawing conclusions. Fire Permit Systems/Sprinkler/Commercial also increased (+22 days).
+> **⚠️ Residential Basic requires follow-up:** median rose from 43 to 222 days (+179), though the small 2025 sample (n=19) means this should be revisited once more data is available. Fire Permit Systems/Sprinkler/Commercial also increased (+22 days).
 
 ---
 
