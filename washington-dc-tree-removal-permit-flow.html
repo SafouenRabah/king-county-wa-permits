@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Washington DC — Tree Removal Permit Process Flow</title>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #f5f5f5;
+      margin: 0;
+      padding: 24px;
+      color: #222;
+    }
+    h1 { font-size: 1.4rem; margin-bottom: 4px; }
+    .meta { color: #666; font-size: 0.85rem; margin-bottom: 24px; }
+    .diagram-wrapper {
+      background: white;
+      border-radius: 8px;
+      padding: 32px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.12);
+      overflow-x: auto;
+    }
+    .mermaid { min-width: 900px; }
+    h2 { font-size: 1.1rem; margin-top: 32px; }
+    table { border-collapse: collapse; width: 100%; font-size: 0.85rem; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
+    th { background: #1565C0; color: white; padding: 10px 12px; text-align: left; }
+    td { padding: 9px 12px; border-bottom: 1px solid #eee; }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: #f0f4ff; }
+    .gaps { background: white; border-radius: 8px; padding: 20px 24px; box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
+    .gaps li { margin-bottom: 8px; line-height: 1.5; }
+    .tag { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 0.75rem; font-weight: 600; }
+    .tag-yes { background: #C8E6C9; color: #1B5E20; }
+    .tag-no  { background: #FFCCBC; color: #BF360C; }
+  </style>
+</head>
+<body>
+
+<h1>🌳 Washington DC — Tree Removal Permit Process Flow</h1>
+<p class="meta">Tenant: <code>washington-dc</code> &nbsp;|&nbsp; Scope: Public Space + Private Property Tree Removal &nbsp;|&nbsp; Generated: 2026-04-26</p>
+
+<div class="diagram-wrapper">
+  <div class="mermaid">
+flowchart TD
+    START([🌳 I want to remove a tree\nin Washington DC]):::start
+
+    START --> KBYA_LOOKUP
+
+    subgraph KBYA ["🔍 KBYA — Property Lookup (auto-populated from GIS)"]
+        KBYA_LOOKUP["Enter your property address\n────────────────────\n📍 Owner Name\n📍 Property Type & Lot Size\n📍 Ward\n📍 Zoning Code & Zone Description\n📍 Overlay Zone\n📍 Flood Zone\n📍 Tree Canopy Coverage\n📍 Historic District\n📍 Shipstead-Luce Act Area"]:::data
+    end
+
+    KBYA_LOOKUP --> Q_LOCATION
+
+    Q_LOCATION{"Is the tree in the\npublic right-of-way?\n(street, sidewalk, ROW)"}:::question
+
+    Q_LOCATION -- "Yes → Public space tree\n(DDOT permit required)" --> Q_SPECIES
+    Q_LOCATION -- "No → Private property tree\n(check size)" --> PRIVATE_TREE
+
+    PRIVATE_TREE{"Tree circumference\nat 4.5ft above ground"}:::question
+    PRIVATE_TREE -- "Less than 44 inches" --> LEAF_SMALL_PRIVATE
+    PRIVATE_TREE -- "44 to 99.9 inches\nSpecial Tree" --> LEAF_SPECIAL
+    PRIVATE_TREE -- "100 inches or more\nHeritage Tree" --> LEAF_HERITAGE
+
+    LEAF_SMALL_PRIVATE["✅ No permit required\n────────────────────\nNo TOPS application needed.\nCheck: is tree adjacent to a\npublic sidewalk area?\nIf so, DDOT review may still apply."]:::leaf
+
+    LEAF_SPECIAL["⚠️ Special Tree Removal Permit\n────────────────────\n☐ TOPS application\n☐ ISA-Certified arborist inspection\n────────────────────\n💰 Fee: $55 per circumference inch\nWaived for Ailanthus, Mulberry,\nor Norway Maple\n────────────────────\nIn historic district?\n  If yes → HPO review required\n\nShipstead-Luce Act area?\n  If yes → Commission of Fine Arts review\n\nTree hazardous?\n  If yes → 10 days to file + arborist cert"]:::leaf
+
+    LEAF_HERITAGE["🚫 Heritage Tree — Cannot Remove\n────────────────────\nTrees 100 inches or more in circumference\nare protected under the Urban Forest\nPreservation Act of 2002.\n────────────────────\nException — if tree is hazardous:\n☐ 10 days to file Special Tree Removal Permit\n☐ ISA-Certified arborist certification\n\nIf relocating instead of removing:\n☐ Heritage Tree Relocation Plan\n☐ Arborist Narrative\n☐ Commitment Letter\n☐ 3-year post-transplant monitoring plan"]:::leaf
+
+    Q_SPECIES{"Tree species?"}:::question
+
+    Q_SPECIES -- "Ailanthus / Mulberry /\nNorway Maple" --> LEAF_EXEMPT_SPECIES
+    Q_SPECIES -- "All other species" --> Q_OVERLAY
+
+    LEAF_EXEMPT_SPECIES["✅ Exempt Species — Permit Required, No Fee\n────────────────────\n☐ TOPS application\n☐ Site Photos (SM 034 format)\n☐ Work Description\n────────────────────\n💰 Mitigation fee: WAIVED\n⏱ Review: up to 30 business days\n────────────────────\nStill apply additive checks →"]:::leaf
+
+    LEAF_EXEMPT_SPECIES --> AC1
+
+    Q_OVERLAY{"Overlay Zone\n(from KBYA)"}:::question
+
+    Q_OVERLAY -- "FH or TS\nTree & Slope Protection" --> LEAF_OVERLAY
+    Q_OVERLAY -- "GT\nGeorgetown" --> LEAF_GT
+    Q_OVERLAY -- "Other or None" --> Q_HISTORIC
+
+    LEAF_OVERLAY["⚠️ Restricted Overlay — Additional Review\n────────────────────\n☐ TOPS application\n☐ Site Photos (SM 034)\n☐ Work Description\n☐ Tree ID (if known)\n☐ Tree Species\n☐ Total Tree Diameter (inches)\n────────────────────\n💰 Fee: $200 per diameter inch\n────────────────────\nFH/TS overlay: additional restrictions\non tree removal and grading.\nArborist consultation recommended\nbefore submitting TOPS application."]:::leaf
+
+    LEAF_OVERLAY --> AC1
+
+    LEAF_GT["⚠️ Georgetown Overlay\n────────────────────\n☐ TOPS application\n☐ Site Photos (SM 034)\n☐ Work Description\n☐ Tree ID (if known)\n☐ Tree Species\n☐ Total Tree Diameter (inches)\n────────────────────\n💰 Fee: $200 per diameter inch\n────────────────────\nGT overlay: heightened historic review\nfor exterior alterations visible\nfrom public space."]:::leaf
+
+    LEAF_GT --> AC1
+
+    Q_HISTORIC{"In a Historic District?\n(from KBYA)"}:::question
+
+    Q_HISTORIC -- "Yes" --> LEAF_HISTORIC
+    Q_HISTORIC -- "No" --> LEAF_STANDARD
+
+    LEAF_HISTORIC["⚠️ Historic District — HPO Review Required\n────────────────────\n☐ TOPS application\n☐ Site Photos (SM 034)\n☐ Work Description\n☐ Tree ID (if known)\n☐ Tree Species\n☐ Total Tree Diameter (inches)\n────────────────────\n💰 Fee: $200 per diameter inch\n⏱ Review: up to 30 business days\n────────────────────\nHPO review required for exterior\nalterations visible from public space.\nTree removal may need extra review if\ntrees contribute to historic streetscape."]:::leaf
+
+    LEAF_HISTORIC --> AC1
+
+    LEAF_STANDARD["✅ Standard Public Space Tree Removal\n────────────────────\n☐ TOPS application\n☐ Site Photos (SM 034)\n☐ Work Description\n☐ Tree ID (if known)\n☐ Tree Species\n☐ Total Tree Diameter (inches)\n────────────────────\n💰 Fee: $200 per diameter inch DBH\n⏱ Review: up to 30 business days\nStart date must be 30+ business days\nfrom application submission."]:::leaf
+
+    LEAF_STANDARD --> AC1
+
+    subgraph ADDITIVE ["📋 Application Assistant — Additive Checks"]
+        direction TB
+        AC1{"Shipstead-Luce\nAct Area?\n(from KBYA)"}:::question
+        AC1 -- "Yes" --> AC1Y["☐ Commission of Fine Arts review\n   required — exterior alterations\n   near Capitol, Mall, Rock Creek Park"]:::info
+        AC1 -- "No" --> AC2
+        AC1Y --> AC2
+
+        AC2{"Zoning Relief\nfrom ZC or BZA?"}:::question
+        AC2 -- "Yes" --> AC2Y["☐ Include zoning case documentation\n   in TOPS application\n   (relief affects review pathway)"]:::info
+        AC2 -- "No" --> AC3
+        AC2Y --> AC3
+
+        AC3{"Public space needed\nfor staging?"}:::question
+        AC3 -- "Yes" --> AC3Y["☐ Separate Temporary Occupancy\n   Permit required\n   💰 Public inconvenience fees apply\n   after 30-day grace period"]:::info
+        AC3 -- "No" --> AC4
+        AC3Y --> AC4
+
+        AC4{"PDRM held?"}:::question
+        AC4 -- "Yes" --> AC4Y["✅ Review expedited for\n   large/complex projects"]:::info
+        AC4 -- "No" --> AC4N["ℹ️ Standard 30-day review\n   PDRM recommended for large\n   or context-sensitive projects"]:::info
+    end
+
+    AC4Y --> SUBMIT
+    AC4N --> SUBMIT
+
+    SUBMIT(["📤 Submit via TOPS\ntops.ddot.dc.gov\n─────────────────\nDDOT Urban Forestry Division\n1100 4th St SW, Washington DC 20024\n☎ 202-671-5133"]):::start
+
+    classDef question fill:#FFF9C4,stroke:#F9A825,color:#333
+    classDef leaf fill:#C8E6C9,stroke:#2E7D32,color:#1B5E20
+    classDef start fill:#F8BBD0,stroke:#C2185B,color:#880E4F
+    classDef info fill:#E3F2FD,stroke:#1565C0,color:#0D47A1
+    classDef data fill:#E8EAF6,stroke:#3F51B5,color:#1A237E
+  </div>
+</div>
+
+<h2>Scenario Summary</h2>
+<table>
+  <tr>
+    <th>#</th><th>Scenario</th><th>Permit</th><th>Key Trigger</th><th>Fee</th><th>KBYA Auto-detects?</th>
+  </tr>
+  <tr><td>1</td><td>Standard public space tree removal</td><td>TOPS Public Space Tree Permit</td><td>Tree in ROW, standard species, no overlays</td><td>$200/inch DBH</td><td><span class="tag tag-no">Partial</span></td></tr>
+  <tr><td>2</td><td>Exempt species (Ailanthus / Mulberry / Norway Maple)</td><td>TOPS Public Space Tree Permit</td><td>Species stated by applicant</td><td><strong>No fee</strong></td><td><span class="tag tag-no">No</span></td></tr>
+  <tr><td>3</td><td>FH or TS overlay zone</td><td>TOPS + overlay restrictions</td><td>Overlay Zone = FH or TS</td><td>$200/inch DBH</td><td><span class="tag tag-yes">Yes</span></td></tr>
+  <tr><td>4</td><td>Georgetown (GT) overlay</td><td>TOPS + historic review</td><td>Overlay Zone = GT</td><td>$200/inch DBH</td><td><span class="tag tag-yes">Yes</span></td></tr>
+  <tr><td>5</td><td>Historic district</td><td>TOPS + HPO review</td><td>Historic District field filled</td><td>$200/inch DBH</td><td><span class="tag tag-yes">Yes</span></td></tr>
+  <tr><td>6</td><td>Shipstead-Luce Act area</td><td>TOPS + Commission of Fine Arts</td><td>Shipstead-Luce = true</td><td>$200/inch DBH</td><td><span class="tag tag-yes">Yes</span></td></tr>
+  <tr><td>7</td><td>Zoning relief (ZC/BZA)</td><td>TOPS + additional documentation</td><td>Applicant confirms ZC/BZA relief</td><td>$200/inch DBH</td><td><span class="tag tag-no">No</span></td></tr>
+  <tr><td>8</td><td>Public space staging needed</td><td>TOPS + Temporary Occupancy Permit</td><td>Applicant confirms staging need</td><td>$200/inch + staging fees</td><td><span class="tag tag-no">No</span></td></tr>
+  <tr><td>9</td><td>Special Tree (private property)</td><td>TOPS Special Tree Permit</td><td>Tree 44"–99.9" circ, private land</td><td>$55/circ inch</td><td><span class="tag tag-no">No</span></td></tr>
+  <tr><td>10</td><td>Heritage Tree — hazardous removal</td><td>TOPS Special Tree + arborist cert</td><td>Tree ≥ 100" circ, hazardous</td><td>No fee</td><td><span class="tag tag-no">No</span></td></tr>
+  <tr><td>11</td><td>Heritage Tree — relocation</td><td>TOPS + HTRP + arborist narrative</td><td>Tree ≥ 100" circ, relocating</td><td>TBD</td><td><span class="tag tag-no">No</span></td></tr>
+</table>
+
+<h2>Config Gaps to Wire Up</h2>
+<div class="gaps">
+  <ol>
+    <li><strong>ROW vs. private property question</strong> — not currently a field. A <code>Tree Location</code> field (Public ROW / Private Property) is needed to enable the private tree branch.</li>
+    <li><strong>Tree size classification</strong> — <code>Total Tree Diameter</code> exists but no guard logic distinguishes Special Tree (≥14" diameter / 44"+ circ) from standard. A derived field or requirement on diameter could surface the Special Tree path automatically.</li>
+    <li><strong><code>required_for_submission: false</code> on all fields</strong> — core fields (Work Description, Proposed Start Date, Proposed End Date, Total Tree Diameter, Site Photos) should be marked required.</li>
+    <li><strong>Field ordering</strong> — all fields have <code>order: null</code>. Display order should match the logical flow above.</li>
+  </ol>
+</div>
+
+<script>
+  mermaid.initialize({ startOnLoad: true, theme: 'default', flowchart: { curve: 'basis', padding: 20 } });
+</script>
+</body>
+</html>
